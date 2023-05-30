@@ -1,0 +1,19 @@
+<div class="row justify-content-center">
+  <div class="col-6 mt-3">
+    <form>
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control" name="username" [(ngModel)]='username'>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" [(ngModel)]='sifra' name="sifra">
+      </div>
+      <button class="btn btn-primary" (click)="logIn()">Submit</button>
+      <ul>
+        <li *ngFor="let i of errors" class="text-danger">{{i}}</li>
+      </ul>
+    </form>
+  </div>
+</div>
+<app-logged-out-nekretnine></app-logged-out-nekretnine>

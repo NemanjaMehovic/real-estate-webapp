@@ -1,0 +1,31 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-6">
+        <form #mikrolokacijForm="ngForm">
+            <div class="mb-3">
+                <label class="form-label">City</label>
+                <select class="form-select" name="gradId" (change)="gradIzabran(mikrolokacijForm)" required ngModel>
+                    <option *ngFor="let i of gradovi; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Municipality</label>
+                <select class="form-select" name="opstinaId" multiple required [(ngModel)]="opstinaId">
+                    <option *ngFor="let i of opstine; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Microlocation</label>
+                <input type="text" class="form-control" required name="mikrolokacija" ngModel>
+            </div>
+            <button class="btn btn-primary mb-3" (click)="addButtonPressed(mikrolokacijForm)">Submit</button>
+            <ng-container *ngIf="success">
+                <div class="alert alert-success mb-3" role="alert">
+                    Microlocation successful added.
+                </div>
+            </ng-container>
+            <ul>
+                <li *ngFor="let i of errors" class="text-danger">{{i}}</li>
+            </ul>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-6">
+        <form #jsonForm="ngForm">
+            <div class="mb-3" *ngIf="!stage2">
+                <label class="form-label">Json file</label>
+                <input type="file" class="form-control" name="fileName" multiple required accept=".json"
+                    (change)="changeEventJ($event)" ngModel>
+            </div>
+            <div class="mb-3" *ngIf="stage2">
+                <label class="form-label">Pictures</label>
+                <input type="file" class="form-control" name="fileName" multiple required accept=".jpg,.jpeg,.png"
+                    (change)="changeEventP($event)" ngModel>
+            </div>
+            <button class="btn btn-primary" (click)="add()">Submit</button>
+            <ng-container *ngIf="success">
+                <div class="alert alert-success mt-3" role="alert">
+                   Real estate successfully added.
+                </div>
+            </ng-container>
+            <ul class="mt-3">
+                <li *ngFor="let i of errors" class="text-danger">{{i}}</li>
+            </ul>
+        </form>
+    </div>
+</div>

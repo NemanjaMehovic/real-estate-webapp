@@ -1,0 +1,86 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-6">
+        <form #registerForm="ngForm">
+            <div class="mb-3">
+                <label class="form-label">Email address*</label>
+                <input type="email" class="form-control" name="email" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password*</label>
+                <input type="password" class="form-control" name="sifra" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Confirm password*</label>
+                <input type="password" class="form-control" name="sifraP" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Username*</label>
+                <input type="text" class="form-control" name="username" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Name*</label>
+                <input type="text" class="form-control" name="ime" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Surname*</label>
+                <input type="text" class="form-control" name="prezime" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Birthday*</label>
+                <input type="date" class="form-control" name="datumR" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Phone number*</label>
+                <input type="text" class="form-control" name="tel" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">City*</label>
+                <select class="form-select" name="gradId" required ngModel>
+                    <option *ngFor="let i of gradovi; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Your picture*</label>
+                <input type="file" class="form-control" name="fileName" required accept=".jpg,.jpeg,.png" (change)="changeEvent($event)" ngModel>
+            </div>
+            <div class="mb-3">
+                <re-captcha siteKey="6LdjkWceAAAAAIVzdfyu58ze-N4Aa7eUqUniPX05" name="captcha" (resolved) = "resolved($event)"></re-captcha>
+            </div>
+            <div class="mb-3">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [(ngModel)]="tip" name="tip" value="B">
+                    <label class="form-check-label">Buyer</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [(ngModel)]="tip" name="tip" value="S">
+                    <label class="form-check-label">Seller</label>
+                </div>
+            </div>
+            <ng-container *ngIf="tip == 'S'">
+                <div class="mb-3">
+                    <label class="form-label">License number</label>
+                    <input type="text" class="form-control" name="brojLicence" ngModel>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Agency</label>
+                    <select class="form-select" name="agencijaId" ngModel>
+                        <option *ngFor="let i of agencije" [value]="i.id">{{i.naziv}}</option>
+                    </select>
+                </div>
+            </ng-container>
+            <button class="btn btn-primary mb-3" (click)="registerButtonPressed(registerForm)">Submit</button>
+            <ng-container *ngIf="success">
+                <div *ngIf="!byAdmin" class="alert alert-success mb-3" role="alert">
+                    Registration successful waiting admin approval.
+                </div>
+                <div *ngIf="byAdmin" class="alert alert-success mb-3" role="alert">
+                    User successful registered.
+                </div>
+            </ng-container>
+            <ul>
+                <li *ngFor="let i of errors" class="text-danger">{{i}}</li>
+            </ul>
+        </form>
+    </div>
+</div>
+<app-logged-out-nekretnine *ngIf="!byAdmin"></app-logged-out-nekretnine>

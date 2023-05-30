@@ -1,0 +1,13 @@
+img{
+    width: 100%;
+    height: 250px;
+}
+.zelena{
+    color: green;
+}
+.crvena{
+    color: red;
+}
+th,td{
+    text-align: center;
+}

@@ -1,0 +1,11 @@
+th,td{
+    text-align: center;
+}
+img{
+    width: 300px;
+    height: 150px;
+}
+.fixedSize{
+    width: 300px;
+    height: 150px;
+}

@@ -1,0 +1,169 @@
+<div class="row mt-3" *ngIf="display()">
+    <div class="row border-end border-top border-start border-dark" style="background-color: lightgray;">
+        <div class="col">
+            <h1>
+                {{nekretnina.ime}}
+            </h1>
+        </div>
+        <div class="col d-flex align-items-end">
+            {{getLokacija()}}
+        </div>
+    </div>
+    <div class="row border border-dark">
+        <div class="row mt-3 mb-3">
+            <div class="col-lg col-sm-12">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div *ngFor="let slika of nekretnina.slike; let i = index" class="carousel-item"
+                            [class.active]="i==0">
+                            <img [src]="'http://localhost:4000/nekretnine/'+slika" class="d-block">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg col-sm-12">
+                <div class="row border-bottom justify-content-between">
+                    <div class="col-3 text-center border border-dark rounded-top"
+                        style="background-color: antiquewhite;">Tip: {{nekretnina.tip}}</div>
+                    <div class="col-3 text-center border border-dark rounded-top"
+                        style="background-color: antiquewhite;">Kvadratura: {{nekretnina.kvadratura}}m2</div>
+                    <div class="col-3 text-center border border-dark  rounded-top"
+                        style="background-color: antiquewhite;">Soba: {{nekretnina.brojSoba}}</div>
+                </div>
+                <div class="row">
+                    <div class="row">
+                        <div class="col">Oglasavac: {{oglasavac()}}</div>
+                        <div class="col">Sprat: {{nekretnina.sprat}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Godina izgradnje: {{nekretnina.godinaIzd}}</div>
+                        <div class="col">Ukupna spratnost: {{nekretnina.maxSprat}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Stanje nekretnine: {{nekretnina.stanje}}</div>
+                        <div class="col">Parking: {{nekretnina.parking ? "Da" : "Ne"}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Tip grejanja: {{nekretnina.tipGrejanja}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg col-sm-12 me-3">
+                <div class="row justify-content-between">
+                    <div class="col-4 border-end border-top border-start border-dark rounded-top"
+                        style="background-color: antiquewhite;">
+                        Karakteristike
+                    </div>
+                    <div class="col-4" [class.zelena]="ispodProseka()" [class.crvena]="!ispodProseka()">
+                        <p class="text-center border-end border-bottom border-start border-primary">
+                            {{nekretnina.cena}}€
+                        </p>
+                    </div>
+                </div>
+                <div class="row p-3 mb-3 border border-dark" style="background-color: antiquewhite;">
+                    <div class="row" *ngFor="let niz of karakteristike">
+                        <div class="col-4 form-check" *ngFor="let k of niz">
+                            <input class="form-check-input" type="checkbox" name="{{k}}" [checked]="proveraChecked(k)">
+                            <label class="form-check-label">{{k}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg col-sm-12">
+                <div class="row justify-content-between">
+                    <div class="col-4 border-end border-top border-start border-dark rounded-top"
+                        style="background-color: antiquewhite;">
+                        Opis
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-primary w-100 mb-1" (click)="addFavorite()">Favorite</button>
+                    </div>
+                </div>
+                <div class="row p-3 mb-3 border border-dark" style="background-color: antiquewhite;">
+                    <div class="row">{{nekretnina.opis}}</div>
+                    <div class="row">
+                        <p class="text-center border-end border-bottom border-start border-primary">
+                            Prosecna cena na lokaciji: {{prosecnaCena()}}€/m2
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-3" *ngIf="agencija == null && display()">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Telephone number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{vlasnik.ime}}</td>
+                <td>{{vlasnik.prezime}}</td>
+                <td>
+                    <div *ngIf="!providan()">
+                        <button class="btn btn-primary" (click)="changeProvidan()">
+                            +
+                        </button>
+                    </div>
+                    <div *ngIf="providan()">
+                        {{vlasnik.telefon}}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="row mt-3" *ngIf="agencija != null && display()">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Agency</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>PIB</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>License number</th>
+                <th>Telephone number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{agencija.naziv}}</td>
+                <td>{{agencija.adresa}}</td>
+                <td>{{agencijaGrad.ime}}</td>
+                <td>{{agencija.pib}}</td>
+                <td>{{vlasnik.ime}}</td>
+                <td>{{vlasnik.prezime}}</td>
+                <td>{{vlasnik.brojLicence}}</td>
+                <td>
+                    <div *ngIf="!providan()">
+                        <button class="btn btn-primary" (click)="changeProvidan()">
+                            +
+                        </button>
+                    </div>
+                    <div *ngIf="providan()">
+                        {{vlasnik.telefon}}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

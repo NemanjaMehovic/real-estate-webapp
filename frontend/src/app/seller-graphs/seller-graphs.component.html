@@ -1,0 +1,24 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-6">
+        <div class="mb-3">
+            <label class="form-label">Microlocation</label>
+            <select class="form-select" name="mikrolokacijaId" (change)="mikrolokacijaIzabrana()" [(ngModel)]="mikrolokacijaId">
+                <option *ngFor="let i of mikrolokacije; index as ind" [value]="i.id">{{i.ime}}</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row mt-3" *ngIf="barChartData!=null">
+    <div style="display: block">
+        <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
+            [type]="barChartType">
+        </canvas>
+    </div>
+</div>
+<div class="row mt-3" *ngIf="hasAgency">
+    <div style="display: block">
+        <canvas baseChart [data]="barChartDataA" [options]="barChartOptions" [plugins]="barChartPlugins"
+            [type]="barChartType">
+        </canvas>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-6">
+        <form #nekretninaForm="ngForm">
+            <div class="mb-3">
+                <label class="form-label">Type*</label>
+                <select class="form-select" name="tip" required ngModel>
+                    <option *ngFor="let i of tip; index as ind" [value]="i">{{i}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">City</label>
+                <select class="form-select" name="gradId" multiple  ngModel>
+                    <option *ngFor="let i of gradovi; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Municipality</label>
+                <select class="form-select" name="opstinaId" multiple ngModel>
+                    <option *ngFor="let i of opstine; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Microlocation</label>
+                <select class="form-select" name="mikrolokacijaId" multiple ngModel>
+                    <option *ngFor="let i of mikrolokacije; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Min number of rooms</label>
+                <select class="form-select" name="brojSoba" ngModel>
+                    <option *ngFor="let i of brojSobaMin; index as ind" [value]="i">{{i}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Max price</label>
+                <input type="number" class="form-control" name="cena" ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Min area</label>
+                <input type="number" class="form-control" name="kvadratura" ngModel>
+            </div>
+            <button class="btn btn-primary mb-3" (click)="search(nekretninaForm)">Submit</button>
+            <ul>
+                <li *ngFor="let i of errors" class="text-danger">{{i}}</li>
+            </ul>
+        </form>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-2 d-flex justify-content-center"><button class="btn btn-primary" (click)="prev()">Prev</button></div>
+    <div class="col-2 d-flex justify-content-center">Page {{currPageNum}} of {{maxPages}}</div>
+    <div class="col-2 d-flex justify-content-center"><button class="btn btn-primary" (click)="next()">Next</button></div>
+</div>
+<app-buyer-display-search [displayNekretnine]="displayNekretnine"></app-buyer-display-search>

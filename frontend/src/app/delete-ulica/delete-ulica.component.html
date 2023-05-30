@@ -1,0 +1,32 @@
+<div class="row mt-3">
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th colspan="2">
+                    Streets
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th colspan="1"></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="ulice.length == 0">
+            <tr>
+                <td colspan="2">No streets :(</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr *ngFor="let lokacija of ulice">
+                <td>
+                    {{lokacija.ime}}
+                </td>
+                <td>
+                    <button class="btn btn-primary" (click)="remove(lokacija)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

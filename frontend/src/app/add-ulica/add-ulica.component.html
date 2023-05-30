@@ -1,0 +1,31 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-6">
+        <form #ulicaForm="ngForm">
+            <div class="mb-3">
+                <label class="form-label">City</label>
+                <select class="form-select" name="gradId" (change)="gradIzabran(ulicaForm)" required ngModel>
+                    <option *ngFor="let i of gradovi; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Microlocation</label>
+                <select class="form-select" name="mikrolokacijaId" multiple required [(ngModel)]="mikrolokacijaId">
+                    <option *ngFor="let i of mikrolokacije; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Street</label>
+                <input type="text" class="form-control" required name="ulica" ngModel>
+            </div>
+            <button class="btn btn-primary mb-3" (click)="addButtonPressed(ulicaForm)">Submit</button>
+            <ng-container *ngIf="success">
+                <div class="alert alert-success mb-3" role="alert">
+                    Street successful added.
+                </div>
+            </ng-container>
+            <ul>
+                <li *ngFor="let i of errors" class="text-danger">{{i}}</li>
+            </ul>
+        </form>
+    </div>
+</div>

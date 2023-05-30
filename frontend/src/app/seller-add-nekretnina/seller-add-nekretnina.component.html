@@ -1,0 +1,115 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-6">
+        <form #nekretninaForm="ngForm">
+            <div class="mb-3">
+                <label class="form-label">Name*</label>
+                <input type="text" class="form-control" name="name" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">City*</label>
+                <select class="form-select" name="gradId" (change)="gradIzabran(nekretninaForm)" required [(ngModel)]="gradId">
+                    <option *ngFor="let i of gradovi; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Municipality*</label>
+                <select class="form-select" name="opstinaId" (change)="opstinaIzabrana(nekretninaForm)" required
+                    [(ngModel)]="opstinaId">
+                    <option *ngFor="let i of opstine; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Microlocation*</label>
+                <select class="form-select" name="mikrolokacijaId" (change)="mikrolokacijaIzabrana(nekretninaForm)" required [(ngModel)]="mikrolokacijaId">
+                    <option *ngFor="let i of mikrolokacije; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Street*</label>
+                <select class="form-select" name="ulicaId" required [(ngModel)]="ulicaId">
+                    <option *ngFor="let i of ulice; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Characteristics</label>
+                <select class="form-select" name="karakteristike" multiple ngModel>
+                    <option *ngFor="let i of karakteristike; index as ind" [value]="i">{{i}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Public transport</label>
+                <select class="form-select" name="gradskiPrevoz" multiple ngModel>
+                    <option *ngFor="let i of linije; index as ind" [value]="i.ime">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Type*</label>
+                <select class="form-select" name="tip" required ngModel>
+                    <option *ngFor="let i of tip; index as ind" [value]="i">{{i}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Area*</label>
+                <input type="number" class="form-control" name="kvadratura" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Number of rooms*</label>
+                <input type="number" class="form-control" name="brojSoba" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Price*</label>
+                <input type="number" class="form-control" name="cena" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Construction date*</label>
+                <input type="date" class="form-control" name="godinaIzd" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">State*</label>
+                <select class="form-select" name="stanje" required ngModel>
+                    <option *ngFor="let i of stanje; index as ind" [value]="i">{{i}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Heating*</label>
+                <select class="form-select" name="tipGrejanja" required ngModel>
+                    <option *ngFor="let i of grejanje; index as ind" [value]="i">{{i}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Floor*</label>
+                <input type="number" class="form-control" name="sprat" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Number of floors in building*</label>
+                <input type="number" class="form-control" name="maxSprat" required ngModel>
+            </div>
+            <div class="mb-3 form-check">
+                <input class="form-check-input" type="checkbox" name="parking" ngModel>
+                <label class="form-check-label">Parking</label>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">About*</label>
+                <input type="text" class="form-control" name="opis" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Monthly utilities*</label>
+                <input type="number" class="form-control" name="mesecnaCena" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Pictures*</label>
+                <input type="file" class="form-control" name="fileName" multiple required accept=".jpg,.jpeg,.png"
+                    (change)="changeEvent($event)" ngModel>
+            </div>
+            <button class="btn btn-primary mb-3" (click)="add(nekretninaForm)">Submit</button>
+            <ng-container *ngIf="success">
+                <div class="alert alert-success mb-3" role="alert">
+                   Real estate successfully added.
+                </div>
+            </ng-container>
+            <ul>
+                <li *ngFor="let i of errors" class="text-danger">{{i}}</li>
+            </ul>
+        </form>
+    </div>
+</div>

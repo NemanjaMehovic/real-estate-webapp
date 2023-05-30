@@ -1,0 +1,106 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <ng-container [ngTemplateOutlet]="adminLoggedIn?admin:buyerLoggedIn?buyer:sellerLoggedIn?seller:noOneLoggedIn">
+    </ng-container>
+  </div>
+</nav>
+
+<ng-template #admin>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="user/changePassword">Change password</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="admin/updateUser">Update user</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle active" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Add
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" routerLink="admin/addUser">User</a></li>
+          <li><a class="dropdown-item" routerLink="admin/addAgencija">Agency</a></li>
+          <li><a class="dropdown-item" routerLink="admin/addMikrolokacija">Microlocation</a></li>
+          <li><a class="dropdown-item" routerLink="admin/addUlica">Street</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Delete
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" routerLink="admin/deleteKorisnik">User</a></li>
+          <li><a class="dropdown-item" routerLink="admin/deleteMikrolokacija">Microlocation</a></li>
+          <li><a class="dropdown-item" routerLink="admin/deleteUlica">Street</a></li>
+        </ul>
+      </li>
+    </ul>
+    <form class="d-flex">
+      <button type="button" class="btn btn-primary" (click)="logOutButtonPressed()">Log out</button>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #buyer>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="user/changePassword">Change password</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="buyer/search">Advanced search</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="buyer/favorites">Favorites</a>
+      </li>
+    </ul>
+    <form class="d-flex">
+      <button type="button" class="btn btn-primary" (click)="logOutButtonPressed()">Log out</button>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #seller>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="user/changePassword">Change password</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="seller/updateSelf">Data</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle active" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Add
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" routerLink="seller/add">Real estate</a></li>
+          <li><a class="dropdown-item" routerLink="seller/addJson">Real estate json</a></li>
+        </ul>
+      </li>
+    </ul>
+    <form class="d-flex">
+      <button type="button" class="btn btn-primary" (click)="logOutButtonPressed()">Log out</button>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #noOneLoggedIn>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    </ul>
+    <form class="d-flex">
+      <button type="button" class="btn btn-primary margin-right" (click)="logInButtonPressed()">Log in</button>
+      <button type="button" class="btn btn-primary" (click)="registerButtonPressed()">Register</button>
+    </form>
+  </div>
+</ng-template>

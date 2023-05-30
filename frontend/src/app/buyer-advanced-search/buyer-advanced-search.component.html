@@ -1,0 +1,103 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-6">
+        <form #nekretninaForm="ngForm">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label">Min price</label>
+                    <input type="number" class="form-control" name="cenaMin" ngModel>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Max price</label>
+                    <input type="number" class="form-control" name="cenaMax" ngModel>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label">Min area</label>
+                    <input type="number" class="form-control" name="kvadraturaMin" ngModel>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Max area</label>
+                    <input type="number" class="form-control" name="kvadraturaMax" ngModel>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label">Min number of rooms</label>
+                    <input type="number" class="form-control" name="sobeMin" ngModel>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Max number of rooms</label>
+                    <input type="number" class="form-control" name="sobeMax" ngModel>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label">Min construction year</label>
+                    <input type="number" class="form-control" name="godinaMin" ngModel>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Max construction year</label>
+                    <input type="number" class="form-control" name="godinaMax" ngModel>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="form-label">Listed by</label>
+                <select class="form-select" name="oglasavac" multiple ngModel>
+                    <option value="agencija">Agency</option>
+                    <option value="vlasnik">Owner</option>
+                </select>
+            </div>
+            <div class="row mb-3">
+                <label class="form-label">State</label>
+                <select class="form-select" name="stanje" multiple ngModel>
+                    <option *ngFor="let i of stanje; index as ind" [value]="i">{{i}}</option>
+                </select>
+            </div>
+            <div class="row mb-3">
+                <label class="form-label">Heating</label>
+                <select class="form-select" name="tipGrejanja" multiple ngModel>
+                    <option *ngFor="let i of grejanje; index as ind" [value]="i">{{i}}</option>
+                </select>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label">Min floor</label>
+                    <input type="number" class="form-control" name="spratMin" ngModel>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Max floor</label>
+                    <input type="number" class="form-control" name="spratMax" ngModel>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label">Min monthly utilities</label>
+                    <input type="number" class="form-control" name="mesecnoMin" ngModel>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Max monthly utilities</label>
+                    <input type="number" class="form-control" name="mesecnoMax" ngModel>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="row" *ngFor="let niz of karakteristike">
+                    <div class="col-4 form-check" *ngFor="let k of niz">
+                        <input class="form-check-input" (click)="checkBoxClicked(k)" type="checkbox" name="{{k}}" ngModel>
+                        <label class="form-check-label">{{k}}</label>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary mb-3" (click)="search(nekretninaForm)">Submit</button>
+            <ul>
+                <li *ngFor="let i of errors" class="text-danger">{{i}}</li>
+            </ul>
+        </form>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-2 d-flex justify-content-center"><button class="btn btn-primary" (click)="prev()">Prev</button></div>
+    <div class="col-2 d-flex justify-content-center">Page {{currPageNum}} of {{maxPages}}</div>
+    <div class="col-2 d-flex justify-content-center"><button class="btn btn-primary" (click)="next()">Next</button></div>
+</div>
+<app-buyer-display-search [displayNekretnine]="displayNekretnine"></app-buyer-display-search>

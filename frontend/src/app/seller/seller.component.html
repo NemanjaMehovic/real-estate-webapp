@@ -1,0 +1,36 @@
+<div class="row mt-3">
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    Real estates
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="nekretnine.length == 0">
+            <tr>
+                <td colspan="3">No real estates :(</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr *ngFor="let korisnik of nekretnine">
+                <td>
+                    {{korisnik.ime}}
+                </td>
+                <td>
+                    <button class="btn btn-primary" (click)="update(korisnik)">Change</button>
+                </td>
+                <td>
+                    <button *ngIf="!korisnik.prodato" class="btn btn-primary" (click)="sold(korisnik)">Sold</button>
+                    <p *ngIf="korisnik.prodato">Prodato</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

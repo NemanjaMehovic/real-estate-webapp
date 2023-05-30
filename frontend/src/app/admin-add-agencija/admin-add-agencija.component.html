@@ -1,0 +1,37 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-6">
+        <form #agencijaForm="ngForm">
+            <div class="mb-3">
+                <label class="form-label">Agency name</label>
+                <input type="text" class="form-control" name="agency" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Address</label>
+                <input type="text" class="form-control" name="adresa" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Phone number</label>
+                <input type="text" class="form-control" name="tel" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">PIB</label>
+                <input type="text" class="form-control" name="pib" required ngModel>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">City</label>
+                <select class="form-select" name="gradId" required ngModel>
+                    <option *ngFor="let i of gradovi; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <button class="btn btn-primary mb-3" (click)="addButtonPressed(agencijaForm)">Submit</button>
+            <ng-container *ngIf="success">
+                <div class="alert alert-success mb-3" role="alert">
+                    Agency successful added.
+                </div>
+            </ng-container>
+            <ul>
+                <li *ngFor="let i of errors" class="text-danger">{{i}}</li>
+            </ul>
+        </form>
+    </div>
+</div>

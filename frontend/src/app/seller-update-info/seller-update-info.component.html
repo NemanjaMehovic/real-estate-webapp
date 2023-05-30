@@ -1,0 +1,30 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-6">
+        <form #updateForm="ngForm">
+            <div class="mb-3">
+                <label class="form-label">Email address*</label>
+                <input type="email" class="form-control" name="email" required [(ngModel)]="email">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Phone number*</label>
+                <input type="text" class="form-control" name="tel" required [(ngModel)]="tel">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Agency</label>
+                <select class="form-select" name="agencijaId" [(ngModel)]="agencijaId">
+                    <option *ngFor="let i of agencije; index as ind" [value]="i.id">{{i.naziv}}</option>
+                </select>
+            </div>
+            <button class="btn btn-primary mb-3" (click)="updateUser(updateForm)">Submit</button>
+            <ng-container *ngIf="success">
+                <div class="alert alert-success mb-3" role="alert">
+                    Info successfully updated
+                </div>
+            </ng-container>
+            <ul>
+                <li *ngFor="let i of errors" class="text-danger">{{i}}</li>
+            </ul>
+        </form>
+    </div>
+</div>
+<app-seller-graphs></app-seller-graphs>

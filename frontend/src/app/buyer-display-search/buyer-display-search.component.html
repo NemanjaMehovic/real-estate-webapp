@@ -1,0 +1,74 @@
+<div class="row mt-3">
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th colspan="9">
+                    Real estates
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    Area
+                </th>
+                <th>
+                    Number of rooms
+                </th>
+                <th>
+                    Floor
+                </th>
+                <th>
+                    About
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Average price
+                </th>
+                <th colspan="1"></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="displayNekretnine.length == 0">
+            <tr>
+                <td colspan="9">No real estates match :(</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr *ngFor="let nekretnina of displayNekretnine">
+                <td>
+                    {{nekretnina.ime}}
+                </td>
+                <td>
+                    {{location(nekretnina)}}
+                </td>
+                <td>
+                    {{nekretnina.kvadratura}}
+                </td>
+                <td>
+                    {{nekretnina.brojSoba}}
+                </td>
+                <td>
+                    {{nekretnina.sprat}}
+                </td>
+                <td>
+                    {{about(nekretnina)}}
+                </td>
+                <td>
+                    {{nekretnina.cena}}
+                </td>
+                <td>
+                    {{prosecnaCena(nekretnina)}}
+                </td>
+                <td>
+                    <button class="btn btn-primary" (click)="details(nekretnina)">Details</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

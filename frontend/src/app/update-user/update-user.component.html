@@ -1,0 +1,60 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-6">
+        <form #updateForm="ngForm">
+            <div class="mb-3">
+                <label class="form-label">User to update</label>
+                <select class="form-select" name="oldUsername" (change)="userIzabran(updateForm)" required ngModel>
+                    <option *ngFor="let i of users; index as ind" [value]="i.username">{{i.username}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" name="email" required [(ngModel)]="email">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="sifra" required [(ngModel)]="sifra">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Confirm password</label>
+                <input type="password" class="form-control" name="sifraP" required [(ngModel)]="sifraP">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" required [(ngModel)]="username">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" name="ime" required [(ngModel)]="ime">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Surname</label>
+                <input type="text" class="form-control" name="prezime" required [(ngModel)]="prezime">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Phone number</label>
+                <input type="text" class="form-control" name="tel" required [(ngModel)]="tel">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">City</label>
+                <select class="form-select" name="gradId" required [(ngModel)]="gradId">
+                    <option *ngFor="let i of gradovi; index as ind" [value]="i.id">{{i.ime}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">User picture</label>
+                <input type="file" class="form-control" name="fileName" required accept=".jpg,.jpeg,.png"
+                    (change)="changeEvent($event)" ngModel>
+            </div>
+            <button class="btn btn-primary mb-3" (click)="updateUser(updateForm)">Submit</button>
+            <ng-container *ngIf="success">
+                <div class="alert alert-success mb-3" role="alert">
+                    User successfully updated
+                </div>
+            </ng-container>
+            <ul>
+                <li *ngFor="let i of errors" class="text-danger">{{i}}</li>
+            </ul>
+        </form>
+    </div>
+</div>
